@@ -1,0 +1,99 @@
+﻿@{
+    ViewData["Title"] = "Inventory";
+}
+@model List<BookModel>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>@ViewData["Title"] - BestofBooks</title>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<script src="~/js/inventorylist-jquery.js"></script>
+<script src="https://kit.fontawesome.com/f9f4cabcd6.js" crossorigin="anonymous"></script>
+
+<div class="container-fluid my-4">
+    <div class="text-center">
+        <h1 class="text-wrap" style="color: #0429AC">Welcome to Best of Books!</h1>
+        <img src="@Url.Content("~/Images/BestofBooks2.png")" class="img-fluid" style="width:13em; padding-bottom:3em" />
+        <p style="color: #0429AC">Our inventory is displayed below. Please let an employee know if you need any assistance!</p>
+    </div>
+</div>
+
+<<<<<<< Updated upstream
+=======
+<div class="container text-center" style="padding: .5em 0 .5em 0">
+    <button id="addBtn" name="Add" style="color:#004803; border-color:#004803; background-color:#DBD9CA"><i class="fa-solid fa-plus" style="font-family:'Bookman Old Style'; color:#004803">Add</i></button>
+</div>
+>>>>>>> Stashed changes
+<div class="container text-center">
+    <table class="table-hover table-bordered align-items-center" id="inventoryListTable" cellspacing=5 cellpadding=5 border="1">
+        <tr class="text-center">
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Author First Name</th>
+            <th>Author Last Name</th>
+            <th>Genre</th>
+            <th>Location</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>In Stock</th>
+        </tr>
+        <!-- hidden row-->
+        <tr class="hidden text-center">
+            <td contenteditable="true" id="isbn_text"><input id="input-style" size="10" type="text" value="___-__-____-_" data-mask="___-__-____-_" /></td>
+            <td contenteditable="true" id="title_text"><input id="input-style" type="text" size="15" placeholder="Type the Title here..." /></td>
+            <td contenteditable="true" id="authorFName_text"><input id="input-style" type="text" size="15" placeholder="Type the Author First Name here..." /></td>
+            <td contenteditable="true" id="authorLName_text"><input id="input-style" type="text" size="15" placeholder="Type the Author Last Name here..." /></td>
+            <td contenteditable="true" id="genre_text"><input id="input-style" type="text" size="10" placeholder="Type the genre here..." /></td>
+            <td contenteditable="true" id="location"><input id="input-style" type="text" size="6" placeholder="Type the location here..." /></td>
+            <td contenteditable="true" id="price"><input id="input-style" type="text" size="4" value="$__.__" data-mask="$__.__" /></td>
+            <td contenteditable="true" id="quantity"><input id="input-style" type="text" size="2" placeholder="0" /></td>
+            <td contenteditable="true" id="Instock"><input id="input-style" type="text" size="5" placeholder="false" /></td>
+            <td><span class="delete-row"><i class="fa-solid fa-trash" style="color:red; text-align:center"></i></span></td>
+        </tr>
+    </table>
+    <div class="container text-center" style="padding: 1em 0 1em 0">
+        <button id="addBtn" name="Add" style="color:#004803; border-color:#004803; background-color:#DBD9CA"><i class="fa-solid fa-plus" style="font-family:'Bookman Old Style'; color:#004803">Add</i></button>
+    </div>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ISBN</th>
+                    <th>Title</th>
+                    <th>Author First Name</th>
+                    <th>Author Last Name</th>
+                    <th>Genre</th>
+                    <th>Location</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.Count(); i++)
+                {
+                    <tr>
+                        <td>@Model[i].ISBN</td>
+                        <td>@Model[i].Title</td>
+                        <td>@Model[i].AuthorFirst</td>
+                        <td>@Model[i].AuthorLast</td>
+                        <td>@Model[i].Genre</td>
+                        <td>@Model[i].Location</td>
+                        <td>@Model[i].Price.ToString("C")</td>
+                        <td>@Model[i].Quantity</td>
+                        <td>@Model[i].InStock</td>
+                        <td><span class="delete-row"><i class="fa-solid fa-trash" style="color:red; text-align:center"></i></span></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+@section Scripts
+    {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    @await Html.PartialAsync("Login")
+}

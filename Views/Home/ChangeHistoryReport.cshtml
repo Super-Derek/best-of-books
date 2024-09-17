@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Change History Report";
+}
+@model UserModel
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<script src="~/js/inventorylist-jquery.js"></script>
+
+<div class="container-fluid my-4">
+    <div class="text-center">
+        <h1 class="text-wrap" style="color: #0429AC">Welcome to Best of Books!</h1>
+        <img src="@Url.Content("~/Images/BestofBooks2.png")" class="img-fluid" style="width:13em; padding-bottom:1em" />
+    </div>
+</div>
+
+
+<div class="container text-center">
+    <p style="color: #0429AC; font-weight:bold; font-size:30px">Change History Report</p>
+
+    <select name="chrUsername" id="chrUsername" asp-for="@Model.Username" style="background-color:#F5F5F5; text-align:center; height:1.65em">
+        @*Place code to iterate through username options here, and delete placeholder values below*@
+        <option value="" disabled selected>Select Username</option>
+        <option value="user1">Book_Worm22</option>
+        <option value="user2">mangaAddict</option>
+        <option value="user3">hcaulfield</option>
+        <option value="user4">eDgYb0i</option>
+        <option value="user5">dr-who</option>
+        <option value="user6">calvin-hobbes</option>
+    </select>
+
+    <select name="chUserLast" id="chUserLast" asp-for="@Model.Username" style="background-color:#F5F5F5; text-align:center; height:1.65em">
+        @*Place code to iterate through username options here, and delete placeholder values below*@
+        <option value="" disabled selected>Select Last Name</option>
+        <option value="user1">Basso</option>
+        <option value="user2">Steinbeck</option>
+        <option value="user3">Woolf</option>
+        <option value="user4">Lewis</option>
+        <option value="user5">Plath</option>
+        <option value="user6">Salinger</option>
+    </select>
+
+    <div class="dropdown">
+        <button onclick="dropdownStateCHI()" class="dropbtn" style="height:1.7em">Select Date</button>
+        <div id="dateRangeDropdown" class="dropdown-content">
+            <label for="beginDate">Begin Date:</label>
+            <input type="date" id="beginDate" name="beginDate" required>
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" required>
+            <br />
+            <button class="datergOKBtn" style="margin:.5em">OK</button>
+        </div>
+    </div>
+
+    <div class="container text-center" style="padding: 1em 0 1em 0">
+        <button id="changHistoryReportSearchBtn" name="inventoryReportSearchBtn">Search</button>
+    </div>
+
+    <table class="table-hover table-bordered align-items-center" id="inventoryListTable" cellspacing=5 cellpadding=5 border="1">
+        <tr class="text-center">
+            <th>Username</th>
+            <th>Last Name</th>
+            <th>Date Range</th>
+            <th>Change Made</th>
+        </tr>
+        <!-- hidden row-->
+        <tr class="hidden text-center">
+            <td size="10"></td>
+            <td size="15"></td>
+            <td size="15"></td>
+            <td size="15"></td>
+        </tr>
+    </table>
+
+    <div class="container text-center" style="padding: 1em 0 1em 0">
+        <button id="changeHistoryReportPrintBtn" name="inventoryReportPrintBtn">Print</button>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+@section Scripts
+{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    @await Html.PartialAsync("Login", model: new UserModel())
+}

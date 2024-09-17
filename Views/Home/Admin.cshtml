@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Admin";
+}
+@model UserModel
+
+<title>@ViewData["Title"]</title>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<script src="~/js/inventorylist-jquery.js"></script>
+<script src="https://kit.fontawesome.com/f9f4cabcd6.js" crossorigin="anonymous"></script>
+
+<div class="container-fluid my-4">
+    <div class="text-center m-auto">
+        <h1 class="text-center text-wrap" style="color: #0429AC">Welcome to Best of Books!</h1>
+        <img src="@Url.Content("~/Images/BestofBooks2.png")" class="img-fluid" style="width:13em" />
+    </div>
+</div>
+<div class="container-fluid table-responsive" id="adminListTable">
+    <div><h2 style="color:#0429AC">User List</h2></div>
+    <table class="table-hover table-bordered" style="background-color: #DBD9CA; color: #0429AC; margin: auto; width: 50%;" cellspacing=2 cellpadding=5 id="data_table" border="0">
+        <tr class="text-center">
+            <th>User</th>
+            <th>User Type</th>
+            <th>View Only</th>
+            <th>Enable Adds</th>
+            <th>Enable Edits</th>
+            <th>Enable Deletes</th>
+            <th>Allow Admin</th>
+        </tr>
+        <!-- hidden row-->
+        <tr class="hidden text-center">
+            <td> @Html.DisplayFor(model => model.FirstName)</td>
+            <td> @Html.DisplayFor(model => model.LastName)</td>
+            <td> @Html.CheckBoxFor(model => model.IsViewOnly)</td>
+            <td> @Html.CheckBoxFor(model => model.AddsEnabled)</td>
+            <td> @Html.CheckBoxFor(model => model.EditsEnabled)</td>
+            <td> @Html.CheckBoxFor(model => model.DeletesEnabled)</td>
+            <td> @Html.CheckBoxFor(model => model.IsAdmin)</td>
+        </tr>
+    </table>
+</div>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+@section Scripts
+    {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    @await Html.PartialAsync("Login", model: new UserModel())
+}

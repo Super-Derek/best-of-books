@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Inventory Report";
+}
+@model AvailableReportModel
+
+<title>@ViewData["Title"] - BestofBooks</title>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<script src="~/js/inventorylist-jquery.js"></script>
+<script src="https://kit.fontawesome.com/f9f4cabcd6.js" crossorigin="anonymous"></script>
+
+<div class="container-fluid my-4">
+    <div class="text-center">
+        <h1 class="text-wrap" style="color: #0429AC">Welcome to Best of Books!</h1>
+        <img src="@Url.Content("~/Images/BestofBooks2.png")" class="img-fluid" style="width:13em; padding-bottom:1em" />
+    </div>
+</div>
+
+
+<div class="container text-center">
+    <p style="color: #0429AC; font-weight:bold; font-size:30px">Inventory List Report</p>
+    <select name="irGenre" id="irGenre" asp-for="@Model.filters.Genre" asp-items="@Model.Genres" style="background-color:#F5F5F5; text-align:center; height:1.6em">
+        <option value="" disabled selected>Select Genre</option>
+    </select>
+
+    <div class="dropdown">
+        <button onclick="dropdownState()" class="dropbtn" style="height:1.6em">Select Author</button>
+        <div id="authorDropdown" class="dropdown-content">
+            <input type="text" placeholder="Search..." id="authorInput" onkeyup="filterFunction()" asp-for="@Model.filters.AuthorFullName" />
+        </div>
+    </div>
+
+    <select name="irInStock" id="irInStock" asp-for="@Model.filters.InStock" style="background-color:#F5F5F5; text-align:center; height:1.6em">
+        <option value="" disabled selected>Select In Stock</option>
+        <option value="all">All</option>
+        <option value="in stock">In Stock</option>
+        <option value="out stock">Out of Stock</option>
+    </select>
+
+    <div class="container text-center" style="padding: 1em 0 1em 0">
+        <button id="inventoryReportSearchBtn" name="inventoryReportSearchBtn">Search</button>
+    </div>
+
+    <table class="table-hover table-bordered align-items-center" id="inventoryListTable" cellspacing=5 cellpadding=5 border="1">
+        <tr class="text-center">
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Author First Name</th>
+            <th>Author Last Name</th>
+            <th>Genre</th>
+            <th>Location</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+        @for (var i = 0; i < Model.Books.Count(); i++)
+                {
+                    <tr>
+                        <td>@Model.Books[i].ISBN</td>
+                        <td>@Model.Books[i].Title</td>
+                        <td>@Model.Books[i].AuthorFirst</td>
+                        <td>@Model.Books[i].AuthorLast</td>
+                        <td>@Model.Books[i].Genre</td>
+                        <td>@Model.Books[i].Location</td>
+                        <td>@Model.Books[i].Price.ToString("C")</td>
+                        <td>@Model.Books[i].Quantity</td>
+                        <td>@Model.Books[i].InStock</td>
+                        <td><span class="delete-row"><i class="fa-solid fa-trash" style="color:red; text-align:center"></i></span></td>
+                    </tr>
+                }
+    </table>
+
+    <div class="container text-center" style="padding: 1em 0 1em 0">
+        <button id="inventoryReportPrintBtn" name="inventoryReportPrintBtn">Print</button>
+    </div>
+
+</div>
+
+    @section Scripts
+{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    @await Html.PartialAsync("Login", model: new UserModel())
+}

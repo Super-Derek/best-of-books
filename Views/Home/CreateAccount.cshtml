@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Create Account";
+}
+@model UserModel
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>@ViewData["Title"]</title>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<script src="https://kit.fontawesome.com/f9f4cabcd6.js" crossorigin="anonymous"></script>
+
+<div class="container-fluid my-4">
+    <div class="text-center m-auto">
+        <h1 class="text-center text-wrap" style="color: #0429AC">Create an Account</h1>
+        <img src="@Url.Content("~/Images/BestofBooks2.png")" class="img-fluid" style="width:5em" />
+    </div>
+</div>
+
+<div class="container-fluid">
+    <form asp-for="UserModel" id="createAccountForm">
+        <div>
+            <label for="firstName" style="color:#0429AC">First Name</label>
+        </div>
+        <div>
+            <input type="text" id="firstName" name="firstName" asp-for="@Model.FirstName" required />
+        </div>
+        <div>
+            <label for="lastName" style="color:#0429AC">Last Name</label>
+        </div>
+        <div>
+            <input type="text" id="lastName" name="lastName" asp-for="@Model.LastName" required />
+        </div>
+        <div>
+            <label for="email" style="color:#0429AC">E-mail</label>
+        </div>
+        <div>
+            <input type="email" id="email" name="email" asp-for="@Model.Email" required />
+        </div>
+        <div>
+            <label for="username" style="color:#0429AC">Username</label>
+        </div>
+        <div>
+            <input type="text" id="username" name="username" asp-for="@Model.Username" required />
+        </div>
+        <div>
+            <label for="password" style="color:#0429AC">Password</label>
+        </div>
+        <div>
+            <input type="text" id="password" name="password" asp-for="@Model.Password" required />
+        </div>
+        <div>
+            <label for="userType" style="color:#0429AC">User Type</label>
+        </div>
+        <div>
+            <select name="userType" id="userType" asp-for="@Model.UserType" required style="background-color:#F5F5F5; text-align:center">
+                <option value="guest">Guest</option>
+                <option value="employee">Employee</option>
+            </select>
+        </div>
+        <button type="submit">Create<br />Account</button>
+    </form>
+</div>
+
+
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+@section Scripts
+    {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    @await Html.PartialAsync("Login", model: new UserModel())
+}
